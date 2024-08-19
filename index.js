@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.get('/', function (req, res) {
+  res.send("hello");
+});
+
 app.listen(process.env.PORT || 8000, () => {
   console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
 });
