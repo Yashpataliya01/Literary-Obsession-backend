@@ -9,7 +9,12 @@ import funRoutes from './routes/function.route.js';
 
 dotenv.config();
 const app = express();
-mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', , {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected successfully'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 app.use(cors({
   origin: 'https://literary-obsession-frontend.vercel.app',
