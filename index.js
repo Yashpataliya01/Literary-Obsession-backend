@@ -12,8 +12,7 @@ const app = express();
 mongoose.connect("mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 app.use(cors({
-  origin: "*",
-  credentials: true,
+  origin: "*"
 }));
 
 app.use(express.json());
