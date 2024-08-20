@@ -46,10 +46,10 @@ export const signin = async(req, res) => {
         return res.status(400).json({message:"Check Password Again"})
       }
       if(result) {
-        let token = jwt.sign({email: email},"jazzyyyy");
+        let token = jwt.sign({email: email},process.env.JWT_SECRET);
         res.cookie("token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: true,
           sameSite: "None"
         });
         return res.status(200).json({ message: user });
@@ -69,7 +69,7 @@ export const getuser = async(req, res) => {
   return res.status(401).json({ error: "No token provided" });
  }
  try {
-  const decoded = jwt.verify(token, "jazzyyyy");
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
   const user = await Users.findOne({ email: decoded.email });
 
     if (!user) {
