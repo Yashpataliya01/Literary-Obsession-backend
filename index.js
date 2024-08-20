@@ -9,10 +9,9 @@ import funRoutes from './routes/function.route.js';
 
 dotenv.config();
 const app = express();
-mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.mongoDb_server)
 
-app.use(cors("https://literary-obsession-frontend.vercel.app"));
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -26,5 +25,5 @@ app.use("/api/books", booksRoutes);
 app.use("/api/function", funRoutes);
 
 app.listen(process.env.PORT || 8000, () => {
-  console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+  console.log(`⚙️ Server is running at port : ${process.env.PORT} & ${process.env.mongoDb_server}`);
 });
