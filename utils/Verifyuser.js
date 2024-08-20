@@ -7,7 +7,7 @@ export const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(401).send('Token not found');
   }
-  jwt.verify(token, process.env.secret_toke, (err, user) => {
+  jwt.verify(token, "jazzyyyy", (err, user) => {
     if (err) {
       return res.status(401).send('Unauthorized');
     }
