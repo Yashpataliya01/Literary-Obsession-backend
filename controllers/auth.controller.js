@@ -49,7 +49,7 @@ export const signin = async(req, res) => {
         let token = jwt.sign({email: email},"jazzyyyy");
         res.cookie("token", token, {
           httpOnly: true,
-          secure: true,
+          secure: process.env.NODE_ENV === "production",
           sameSite: "None"
         });
         console.log(token)
