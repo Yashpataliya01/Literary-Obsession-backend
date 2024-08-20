@@ -46,10 +46,10 @@ export const signin = async(req, res) => {
         return res.status(400).json({message:"Check Password Again"})
       }
       if(result) {
-        let token = jwt.sign({email: email},process.env.JWT_SECRET);
+        let token = jwt.sign({email: email},"hellow");
         res.cookie("token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: true,
           sameSite: "None"
         });
         return res.status(200).json({ message: user });

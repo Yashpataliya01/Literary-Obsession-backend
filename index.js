@@ -11,7 +11,10 @@ dotenv.config();
 const app = express();
 mongoose.connect("mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://literary-obsession-frontend.vercel.app"], // Allow only your frontend domain
+  credentials: true, // This allows cookies to be sent and received
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
