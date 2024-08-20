@@ -24,12 +24,6 @@ app.get('/', (req, res) => {
   res.send("hello");
 });
 
-app.get('/api/auth/getuser', (req, res) => {
-  console.log("Request received for /api/auth/getuser");
-  res.json({ user: "exampleUser" });
-});
-
-
 app.use("/api/auth", userRoutes);
 app.use("/api/books", booksRoutes);
 app.use("/api/function", funRoutes);

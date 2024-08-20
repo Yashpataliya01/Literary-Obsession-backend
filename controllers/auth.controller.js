@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
-import User from "../models/user.model.js"
+import Users from "../models/users.model.js"
 import express from "express";
 import dotenv from "dotenv";
 
@@ -12,7 +12,7 @@ app.use(cookieParser());
 export const signup = async(req, res) => {
   const { username, email, password } = req.body;
   try {
-    const userData = await User.findOne({email})
+    const userData = await Users.findOne({email})
     if (userData) {
       res.status(400).json({error: "User already created"});
     }
@@ -20,7 +20,7 @@ export const signup = async(req, res) => {
       if (err) {
         res.status(400).json({error: "Something went wrong"});
       } else {
-        const newuser = User.create({
+        const newuser = Users.create({
           username,
           email,
           password: hash,
@@ -37,7 +37,7 @@ export const signin = async(req, res) => {
   const { email, password } = req.body;
   console.log("email", email, password);
   try {
-    const user = await User.findOne({email})
+    const user = await Users.findOne({email})
     if(!user) {
       return res.status(500).json({message:"Create User First"});
     }
@@ -46,7 +46,7 @@ export const signin = async(req, res) => {
         return res.status(400).json({message:"Check Password Again"})
       }
       if(result) {
-        let token = jwt.sign({email: email},process.env.secret_toke);
+        let token = jwt.sign({email: email},"jazzyyyy");
         res.cookie("token", token);
         console.log(token)
         return res.status(200).json({ message: user });
@@ -66,8 +66,8 @@ export const getuser = async(req, res) => {
   return res.status(401).json({ error: "No token provided" });
  }
  try {
-  const decoded = jwt.verify(token, process.env.secret_toke);
-  const user = await User.findOne({ email: decoded.email });
+  const decoded = jwt.verify(token, "jazzyyyy");
+  const user = await Users.findOne({ email: decoded.email });
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });

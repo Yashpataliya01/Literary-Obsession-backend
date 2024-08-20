@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import Books from '../models/books.model.js';
-import User from '../models/user.model.js';
+import Users from '../models/users.model.js';
 
 const app = express();
 app.use(cookieParser());
@@ -11,7 +11,7 @@ export const addfav = async (req, res) => {
   const { bookid } = req.body;
   try {
     let book = await Books.findById(bookid);
-    let user = await User.findOne({ email: req.user.email });
+    let user = await Users.findOne({ email: req.user.email });
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
@@ -32,7 +32,7 @@ export const addfav = async (req, res) => {
 
 export const getfavbook = async (req, res) => {
     try {
-      const user = await User.findOne({ email: req.user.email }).populate('fav'); 
+      const user = await Users.findOne({ email: req.user.email }).populate('fav'); 
       if (!user) {
         return res.status(404).json({ error: "User not found" });
       }
@@ -47,7 +47,7 @@ export const removefav = async (req, res) => {
   const { bookid } = req.body;
   try {
     let book = await Books.findById(bookid);
-    let user = await User.findOne({ email: req.user.email });
+    let user = await Users.findOne({ email: req.user.email });
     
     if (!user) {
       return res.status(404).send({ message: "User not found" });
@@ -75,7 +75,7 @@ export const removefav = async (req, res) => {
 export const addtocart = async (req, res) => {
  let {bookid} = req.body 
  try {
-  const user = await User.findOne({email: req.user.email});
+  const user = await Users.findOne({email: req.user.email});
   if (!user) {
     return res.status(404).send({message: "User not found"});
   }
@@ -93,7 +93,7 @@ export const addtocart = async (req, res) => {
 
 export const getcart = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.user.email }).populate('cart'); 
+    const user = await Users.findOne({ email: req.user.email }).populate('cart'); 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -109,7 +109,7 @@ export const removecart = async (req, res) => {
   console.log("bookId:", bookId);
   try {
     let book = await Books.findById(bookId);
-    let user = await User.findOne({ email: req.user.email });
+    let user = await Users.findOne({ email: req.user.email });
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
@@ -128,7 +128,7 @@ export const removecart = async (req, res) => {
 export const updatebuyed = async (req, res) => {
   const { newBuyedData } = req.body;
   try {
-    const user = await User.findOne({ email: req.user.email });
+    const user = await Users.findOne({ email: req.user.email });
     
     if (!user) {
       return res.status(404).send({ message: "User not found" });

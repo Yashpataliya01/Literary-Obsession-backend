@@ -33,6 +33,6 @@ buyed:[{
 }]
 },{ timestamps: true });
 
-const User = mongoose.model("User", userSchema);
+const Users = mongoose.model("Users", userSchema);
 
-export default User;
+export default Users;
