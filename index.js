@@ -9,14 +9,13 @@ import funRoutes from './routes/function.route.js';
 
 dotenv.config();
 const app = express();
-mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/')
 .then(() => console.log('MongoDB connected successfully'))
 .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(cors({
   origin: 'https://literary-obsession-frontend.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 app.use(express.json());
