@@ -49,10 +49,9 @@ export const signin = async(req, res) => {
         let token = jwt.sign({email: email},"jazzyyyy");
         res.cookie("token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV == "production",
+          secure: process.env.NODE_ENV === "production",
           sameSite: "None"
         });
-        console.log(token, "its token")
         return res.status(200).json({ message: user });
       } else {
         return res.status(401).json({ error: "Invalid credentials" });
