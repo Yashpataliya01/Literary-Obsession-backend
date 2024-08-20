@@ -9,7 +9,7 @@ import funRoutes from './routes/function.route.js';
 
 dotenv.config();
 const app = express();
-mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect('mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0')
 
 app.use(cors("https://literary-obsession-frontend.vercel.app"));
 
