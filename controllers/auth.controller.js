@@ -52,7 +52,7 @@ export const signin = async(req, res) => {
           secure: process.env.NODE_ENV === "production",
           sameSite: "None"
         });
-        console.log(token)
+        console.log(token, "its token")
         return res.status(200).json({ message: user });
       } else {
         return res.status(401).json({ error: "Invalid credentials" });
