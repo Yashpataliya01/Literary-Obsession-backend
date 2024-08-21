@@ -48,7 +48,7 @@ export const signin = async(req, res) => {
       if(result) {
         let token = jwt.sign({email: email},process.env.JWT_SECRET);
         res.cookie("token", token);
-        return res.status(200).json({ message: user });
+        return res.status(200).json({ message: token });
       } else {
         return res.status(401).json({ error: "Invalid credentials" });
       }
