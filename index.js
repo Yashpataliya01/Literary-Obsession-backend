@@ -11,7 +11,10 @@ dotenv.config();
 const app = express();
 mongoose.connect("mongodb+srv://yashpataliya01:yashdeep@cluster0.6e3mz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
-app.use(cors("https://literary-obsession-frontend.vercel.app"))
+app.use(cors({
+  origin: "https://literary-obsession-frontend.vercel.app",
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
