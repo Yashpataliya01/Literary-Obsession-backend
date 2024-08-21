@@ -60,7 +60,8 @@ export const signin = async(req, res) => {
 }
 
 export const getuser = async(req, res) => {
- const token = req.cookies.token;
+  const  token  = req.body;
+  console.log("tokem", token)
  if(!token) {
   return res.status(401).json({ error: "No token provided" });
  }
