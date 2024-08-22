@@ -1,18 +1,19 @@
 import jwt from 'jsonwebtoken';
 import * as dotenv from "dotenv";
-dotenv.config()
+dotenv.config();
 
 export const verifyToken = (req, res, next) => {
-  const token = req.body.token || req.headers.authorization?.split(' ')[1];
-  console.log("req", req)
+  const authHeader = req.headers.authorization;
+  const token = req.body.token || (authHeader && authHeader.split(' ')[1]);
+  console.log("Request Method:", req.method, "Request URL:", req.originalUrl);
   if (!token) {
-    return res.status(401).send('Token not found');
+    return res.status(401).json({ message: 'Token not found' });
   }
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      return res.status(401).send('Unauthorized');
+      return res.status(403).json({ message: 'Unauthorized: Invalid token' });
     }
     req.user = user;
     next();
   });
-}
+};
