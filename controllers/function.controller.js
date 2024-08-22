@@ -115,7 +115,7 @@ export const removecart = async (req, res) => {
     if (!book) {
       return res.status(404).send({ message: "Book not found" });
     }
-    user.cart = user.cart.filter(id => id.toString() !== bookId.toString());
+    user.cart = user.cart.filter(id => id.toString() !== bookid.toString());
     await user.save();    
     res.status(200).send({ message: "Book removed from Cart" });
   } catch (error) {
