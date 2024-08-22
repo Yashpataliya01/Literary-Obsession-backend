@@ -105,11 +105,9 @@ export const getcart = async (req, res) => {
 }
 
 export const removecart = async (req, res) => {
-  const { bookId } = req.body;
-  console.log(req.body);
-  console.log("bookId:", bookId);
+  const { bookid } = req.body;
   try {
-    let book = await Books.findById(bookId);
+    let book = await Books.findById(bookid);
     let user = await Users.findOne({ email: req.user.email });
     if (!user) {
       return res.status(404).send({ message: "User not found" });
