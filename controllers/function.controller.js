@@ -106,6 +106,7 @@ export const getcart = async (req, res) => {
 
 export const removecart = async (req, res) => {
   const { bookId } = req.body;
+  console.log(req.body);
   console.log("bookId:", bookId);
   try {
     let book = await Books.findById(bookId);
