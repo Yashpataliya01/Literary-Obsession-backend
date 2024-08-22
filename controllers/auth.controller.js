@@ -61,7 +61,6 @@ export const signin = async(req, res) => {
 
 export const getuser = async(req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
-  console.log("tokem", token)
  if(!token) {
   return res.status(401).json({ error: "No token provided" });
  }
